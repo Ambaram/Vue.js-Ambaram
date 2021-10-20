@@ -21,7 +21,24 @@
   <body>
     <div id="app">
       <span v-if="profile">
-        Profile of {{profile.fname}} {{profile.lname}}
+        <div v-if="profile.pic">
+          <img
+            v-bind:src="profile.pic"
+            v-bind:style="profile.picstyle"
+            v-bind:alt="profile.alttext"
+          />
+        </div>
+        <div v-else>
+          <img
+            v-bind:src="profile.default"
+            v-bind:style="profile.picstyle"
+            v-bind:alt="profile.noimage"
+          />
+        </div>
+        <h1>{{profile.fname}} {{profile.lname}}</h1>
+        <h2>{{profile.bio}}</h2>
+        <h2 v-if="profile.desc">{{profile.desc}}</h2>
+        <h2 v-else>No description found!!</h2>
       </span>
       <span v-else> No Profile Data found. </span>
     </div>
@@ -31,20 +48,27 @@
         el: "#app",
 
         data: {
-          /*
-			profile:{
-				fname: "John",
-				lname: "Doe"	
-			}
-			*/
+          profile: {
+            fname: "Ambaram",
+            lname: "Srivastava",
+            bio: "Web Developer",
+            desc: "Post Grad Student at Humber College",
+            default:
+              "https://pereaclinic.com/wp-content/uploads/2019/12/270x270-male-avatar.png",
+            pic: "https://scontent.fyyz1-1.fna.fbcdn.net/v/t1.6435-9/173696629_3913069955454071_6606292730991116246_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Kctjw5H-cLkAX97IBTz&tn=eC-9TPMtUgXwrPgM&_nc_ht=scontent.fyyz1-1.fna&oh=23b3a5c6ba4102e202306e654d35ece9&oe=619656A1",
+            picstyle: {
+              width: "200px",
+              height: "200px",
+              "border-radius": "100%",
+            },
+            alttext: "Ambaram's Image",
+            noimage: "No Image Found!!",
+          },
         },
       });
     </script>
 
     <!--
-		//step 1: Read Code Above
-		//step 2: Does the profile show up?
-		
 		v-if="boolean_expression"
 		v-else-if="boolean_expression"
 		v-else
