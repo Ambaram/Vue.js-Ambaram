@@ -6,12 +6,14 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
       .container {
-        background: #cecece;
+        background: #ffffff;
       }
     </style>
   </head>
   <body>
     <div id="app">
+      <img v-bind:src="picture" v-bind:alt="newAlt" v-bind:style="picstyle" />
+      <h1>{{name}}</h1>
       <!--
 		//step 1: open console
 		//step 2: inspect "look at me!" HTML
@@ -39,7 +41,10 @@
 			1. Create an image and set the following attributes with Vue {src, alt, title}
 			2. Augment the span below to include another class called "highlight", which has a yellow border.
 		-->
-      <span v-bind:class="loadClass"> look at me! </span>
+      <span v-bind:class="loadClass"
+        >Look at this!!
+        <p v-bind:class="otherclass" v-bind:style="newStyle">{{content}}</p>
+      </span>
     </div>
 
     <script>
@@ -48,8 +53,18 @@
         el: "#app",
         data: {
           loadClass: "container",
-          //newStyle : 'font-size:30px;',
-          //newAlt : 'dynamically set alt!'
+          otherclass: "highlight",
+          content: "Yellow bordered content",
+          newAlt: "Dynamic Alt",
+          picture:
+            "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg",
+          picstyle: {
+            width: "150px",
+            height: "150px",
+            "border-radius": "100%",
+          },
+          name: "WooHoo",
+          newStyle: { border: "4px solid yellow", width: "200px" },
         },
       });
     </script>
