@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue-Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      .formfield {
+        width: 50%;
+        margin: auto;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Epidemiology Problem</h1>
+    <div id="app">
+      <div class="formfield">
+        <label>Total Targets</label>
+        <input type="text" v-model="targets" />
+      </div>
+      <div class="formfield">
+        <label>Infected People</label>
+        <input type="text" v-model="infected" />
+      </div>
+      <div class="formfield">
+        <label>People in contact </label>
+        <input type="text" v-model="contacts" />
+      </div>
+      <div class="formfield">
+        <input type="submit" value="submit" v-on:click="showresults();" />
+      </div>
+      <div class="formfield">You have {{days}} days.</div>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          days: 0,
+          infected: 0,
+          contacts: 0,
+          targets: 0,
+        },
+        methods: {
+          showresults: function () {
+            var time = 0;
+            var x = this.infected * this.contacts;
+            for (var infected = 0; infected < this.targets; infected++) {
+              infected = infected + Math.pow(x, time);
+              infected = infected - 1;
+              time = time + 1;
+              console.log(infected);
+            }
+            this.days = time - 1;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
